@@ -1,4 +1,8 @@
 #! D:\Python\python.exe
+# 1a-add
+# addition 2 nombres
+# FERREIRA Théo
+# 06/11/2018
 
 def convertInt(param):
     try:
