@@ -1,15 +1,26 @@
+
+#! D:\Python\python.exe
+# 1d-mol
+# jeu +/-
+# FERREIRA Théo
+# 06/11/2018
+
 import random
 import re
 import signal
 
 regexnb = re.compile("[0-9]+")
-nbRandom = random.randint(0,100)
+nbRandom = random.randint(0, 100)
 nbTry = 0
+
 
 def nepasquitter(signum, frame):
         print("\n Non ")
+
+
 def nepasquitterdutout(signum, frame):
         print("\n STOP")
+
 
 def Quitter():
     return print("\nLa solution était:", nbRandom)
