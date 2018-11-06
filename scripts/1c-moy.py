@@ -1,5 +1,11 @@
 #! D:\Python\python.exe
+# 1c-moy
+# entrer des notes pour un nom et faire moyenne
+# FERREIRA Théo
+# 06/11/2018
+
 import operator
+
 
 def convertInt(param):
     try:
@@ -16,7 +22,7 @@ while True:
 
     if read == "q":
         break
-       
+
     read = str(read).split(' ')
 
     if len(read) < 2:
@@ -25,7 +31,7 @@ while True:
 
     nom = read[0]
     note = convertInt(read[1])
-    
+
     if note == -1:
         print("Êtes-vous sûr d'avoir entré un nombre ?")
         continue
@@ -36,9 +42,6 @@ while True:
 
     dico[nom] = note
 
-print(sorted(dico.items(), key=operator.itemgetter(1), reverse = True)[:5])
+print(sorted(dico.items(), key=operator.itemgetter(1), reverse=True)[:5])
 moy = sum(dico.values()) / len(dico)
-print("La moyenne est de " + str (moy))
-
-
-
+print("La moyenne est de " + str(moy))
