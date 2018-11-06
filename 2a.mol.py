@@ -4,8 +4,6 @@ import random
 import re
 import signal
 
-signal.signal(signal.SIGINT, end_game)
-
 def read_in_file():
   file = open("plusoumoins.txt", "r")
   msg = file.readline().strip()
@@ -25,6 +23,8 @@ def write_in_file(msg):
   file.write(msg)
   file.close()
   
+signal.signal(signal.SIGINT, end_game)
+
 end = False
 nbr = random.randint(0,100)
 
