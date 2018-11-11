@@ -1,6 +1,6 @@
 #! C:\Users\Lucas\AppData\Local\Programs\Python\Python36-32\python.exe
-# 3a-save
-# Description : archive sauvegarde
+# 3c-ssh
+# Description : archive sauvegarde optimisé + ssh --> ne fonctionne pas.
 # Auteur : Lucas CONSEJO & Théo FERREIRA
 # Date : 10/11/2018
 
@@ -10,6 +10,9 @@ import gzip
 import os
 import sys
 import subprocess
+import argparse
+from paramiko import SSHClient
+from scp import SCPClient
 
 
 # Fonction qui ferme le programme
@@ -17,6 +20,17 @@ def fermeture(signal, frame):
     exit()
 
 signal.signal(signal.SIGINT, fermeture)
+
+
+# Fonction qui permet de choisir le chemin du dossier 'Data'
+def cheminData():
+    arguments = argparse.ArgumentParser()
+    arguments.add_argument("-p", "--path", help="chemin vers le dossier à archiver")
+    args = arguments.parse_args()
+    if args.path:
+        return args.path
+    else:
+        return '../scripts'
 
 
 # Fonction qui archive une sauvegarde
@@ -30,9 +44,18 @@ def deleteSauvegarde():
     if os.path.exists(archive + '.tar.gz'):
         os.remove(archive + '.tar.gz')
 
-dossierData = os.path.expanduser('./data/')
+dossierData = os.path.expanduser(cheminData()+'/data/')
 dossierScripts = os.path.expanduser('../scripts')
 archive = os.path.expanduser('./archive')
+
+ssh = SSHClient()
+ssh.load_system_host_keys()
+ssh.connect('ip')
+
+scp = SCPClient(ssh.get_transport())
+scp.put(dossierData)
+
+scp.close()
 
 # Création du dossier 'Data'
 os.makedirs(dossierData, exist_ok=True)
